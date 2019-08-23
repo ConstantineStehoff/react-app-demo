@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleLogo } from '../../store/App/actions';
 import { State } from '../../store/rootReducer';
+import Button from '@material-ui/core/Button';
+import NavBar from '../NavBar';
+import Dashboard from '../Dashboard';
 
 const logo = require('../../assets/logo.svg');
 
@@ -13,10 +16,14 @@ interface DispatchProps {
 const Home = ({ toggleLogo, showLogo }: DispatchProps) => {
   return (
     <div>
-      <button className="btn--primary" onClick={toggleLogo}>
+      {/* <NavBar />
+      <Button variant="contained" color="primary" onClick={toggleLogo}>
         Toggle Logo!
-      </button>
-      {showLogo ? <img src={logo} /> : null}
+      </Button>
+      {showLogo ? <img src={logo} /> : null} */}
+
+      <Dashboard />
+
     </div>
   );
 };

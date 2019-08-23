@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import logo from '../../assets/logo.svg';
+import React from 'react';
 import './App.scss';
+import 'typeface-roboto';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 import routes from '../../routes';

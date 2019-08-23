@@ -5,12 +5,14 @@ import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import configureStore, { history } from './store';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const store = configureStore();
 
 ReactDOM.render(
   <div className={'app'}>
     <Provider store={store}>
+      <CssBaseline />
       <App history={history} />
     </Provider>
   </div>,

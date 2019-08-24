@@ -118,6 +118,9 @@ const App = (props) => {
                       Submit
                     </Button>
                   </Grid>
+                  <Grid item xs={12}>
+                    <Venues venues={mockPlaces} />
+                  </Grid>  
                 </Grid>
               </Paper>
             </form>
@@ -126,7 +129,7 @@ const App = (props) => {
             <Button onClick={() => getMockPlaces('Chicago', 'IL')}>
               Trigger api call
             </Button>
-            <Venues venues={mockPlaces} />
+            
           </Container>
         </main>
       </div>

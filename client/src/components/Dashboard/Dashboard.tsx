@@ -2,19 +2,18 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Orders from './Orders';
+import Venues from './Venues';
 import { TextField, Button } from '@material-ui/core';
 import { getPlaces } from '../../store/Dashboard/actions';
 import { getPlacesPending, getPlacesError, getPlacesSuccess } from '../../store/Dashboard/reducers';
 import { State } from '../../store/rootReducer';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { NavBar } from './NavBar';
 
 const Copyright = () => {
   return (
@@ -27,29 +26,6 @@ const Copyright = () => {
 const useStyles = makeStyles((theme:Theme) => ({
   root: {
     display: 'flex',
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-      transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   menuButton: {
     marginRight: 36,
@@ -89,9 +65,7 @@ const Dashboard = (props:any) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}></Toolbar>
-      </AppBar>
+      <NavBar />
       
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -116,7 +90,7 @@ const Dashboard = (props:any) => {
                 {/* Recent Orders */}
                 <Grid item xs={12}>
                     <Paper className={classes.paper}>
-                    <Orders />
+                      <Venues />
                     </Paper>
                 </Grid>
                 {/* Chart */}

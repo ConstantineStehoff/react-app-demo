@@ -30,7 +30,7 @@ export function GetPlacesSuccess(places: any){
 }
 
 const clientId = '3CQBBP2ULDOY3WXRLYEQJRCTGWUBTEXS323NVKZDKO3OXHC0';
-const clientSecret = 'V3W5NLX0A4RSYBBCSRVGL0HYVDEPCRL3DMNWYUUDH5BEKBUA&v=20190823'; 
+const clientSecret = 'OUVCGURQ23CHQKWBTOGMH4WDVAMIN32IOBFAGZCKDMBXDJR4'; 
 // const limit = '2';
 
 export function getPlaces(){

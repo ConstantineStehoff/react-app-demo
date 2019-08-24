@@ -29,8 +29,8 @@ export function GetPlacesSuccess(places: any){
     }
 }
 
-const clientId = '3CQBBP2ULDOY3WXRLYEQJRCTGWUBTEXS323NVKZDKO3OXHC0';
-const clientSecret = 'OUVCGURQ23CHQKWBTOGMH4WDVAMIN32IOBFAGZCKDMBXDJR4'; 
+const clientId = '';
+const clientSecret = ''; 
 // const limit = '2';
 
 export function getPlaces(){

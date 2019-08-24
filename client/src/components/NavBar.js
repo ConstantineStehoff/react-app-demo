@@ -5,7 +5,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 
 export const NavBar = () => {
-  const useStyles = makeStyles((theme:Theme) => ({
+  const useStyles = makeStyles((theme) => ({
       toolbar: {
         paddingRight: 24, // keep right padding when drawer closed
       },

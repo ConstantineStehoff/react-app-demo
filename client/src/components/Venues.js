@@ -9,7 +9,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
-import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types';
+import Venue from './Venue';
+import DynamicTableHead from './DynamicTableHead';
 
 const useStyles = makeStyles(theme => ({
   seeMore: {
@@ -19,29 +21,22 @@ const useStyles = makeStyles(theme => ({
 
 export const Venues = (props) => {
   const classes = useStyles();
-  console.log('My props are ' + JSON.stringify(props));
+  // console.log('My props are ' + JSON.stringify(props));
+  const tableCols = [
+    {id: 1, name: 'Name'}, 
+    {id: 2, name: 'Categories'}, 
+    {id: 3, name: 'Location'}, 
+    {id: 4, name: 'City'}, 
+    {id: 5, name: 'State'}
+  ];
   return (
     <React.Fragment>
       <Title>Found Venues</Title>
       <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Location</TableCell>
-            <TableCell>City</TableCell>
-            <TableCell>State</TableCell>
-            <TableCell>Country</TableCell>
-          </TableRow>
-        </TableHead>
+        <DynamicTableHead headernames={tableCols} />
         <TableBody>
           {props.venues.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.location.address}</TableCell>
-              <TableCell>{row.location.city}</TableCell>
-              <TableCell>{row.location.state}</TableCell>
-              <TableCell>{row.location.country}</TableCell>
-            </TableRow>
+            <Venue key={row.id} name={row.name} categories={row.categories} location={row.location} />     
           ))}
         </TableBody>
       </Table>

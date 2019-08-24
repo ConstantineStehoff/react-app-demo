@@ -1,11 +1,15 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
-export const Copyright = () => {
+export const Copyright = (props) => {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
-          React Demo App
+          {props.name}
       </Typography>
     );
+}
+
+Copyright.propTypes = {
+  name: PropTypes.string.isRequired
 }

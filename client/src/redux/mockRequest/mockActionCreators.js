@@ -27,9 +27,10 @@ function GetMockPlacesError(error){
 
 const URL = './mockResponse.json';
 
-function getMockPlaces(city, state){
+const getMockPlaces = (city, state) => {
     console.log('Trying to do the action');
-    return (dispatch) => {
+    console.log('City and state are ' + city + ', ' + state);
+    return  async (dispatch) => {
         dispatch(GetMockPlacesPending());
         // fetch(URL)
         //   // .then(res => res.json())
@@ -40,7 +41,6 @@ function getMockPlaces(city, state){
         // .catch(error => {
         //     dispatch(GetMockPlacesError(error));
         // }) 
-        console.log('City and state are ' + city + ', ' + state);
         return new Promise((resolve) => {
             resolve(
                 dispatch(GetMockPlacesSuccess([

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getPlaces } from '../redux/actionCreators';
 import { getMockPlaces } from '../redux/mockRequest/mockActionCreators';
 import { Venues } from './Venues';
+import Title from './Title';
 import { makeStyles } from '@material-ui/core';
 import {
   Container,
@@ -14,6 +15,7 @@ import {
 } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import { TextField } from 'final-form-material-ui';
+import { Copyright } from './Copyright';
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -52,9 +54,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const onSubmit = async values => {
-  console.log(values);
-};
+
 const validate = values => {
   const errors = {};
   if (!values.city) {
@@ -68,7 +68,7 @@ const validate = values => {
 
 const App = (props) => {
     const classes = styles();
-    const { getMockPlaces } = props;
+    const { onSubmit } = props;
     // useEffect(() => getMockPlaces(), []);
     // console.log(props.places);
     const mockPlaces = props.mockPlaces.places;
@@ -87,6 +87,7 @@ const App = (props) => {
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit} noValidate>
               <Paper style={{ padding: 16 }}>
+                <Title>Search Form</Title>
                 <Grid container alignItems="flex-start" spacing={8}>
                   <Grid item xs={6}>
                     <Field
@@ -108,29 +109,26 @@ const App = (props) => {
                       label="State"
                     />
                   </Grid>
-                  <Grid item style={{ marginTop: 16 }}>
+                  <Grid item style={{ marginTop: 8 }}>
                     <Button
                       variant="contained"
                       color="primary"
                       type="submit"
                       disabled={submitting}
                     >
-                      Submit
+                      Search
                     </Button>
                   </Grid>
                   <Grid item xs={12}>
                     <Venues venues={mockPlaces} />
-                  </Grid>  
+                  </Grid>
                 </Grid>
               </Paper>
             </form>
             )}
             />
-            <Button onClick={() => getMockPlaces('Chicago', 'IL')}>
-              Trigger api call
-            </Button>
-            
           </Container>
+          <Copyright name="React Demo App"/>
         </main>
       </div>
     )
@@ -148,7 +146,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // getPlaces: () => { dispatch(getPlaces()) },
-    getMockPlaces: () => {dispatch(getMockPlaces())}
+    onSubmit: async values => dispatch(getMockPlaces(values.city, values.state))
   }
 }
 export default connect(

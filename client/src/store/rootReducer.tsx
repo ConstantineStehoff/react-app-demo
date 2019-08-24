@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { History } from 'history';
 import { RouterState, connectRouter } from 'connected-react-router';
-import { appReducer } from './App/reducers';
-import { AppState } from './App/types';
+import { appReducer } from './Dashboard/reducers';
+import { AppState } from './Dashboard/types';
 
 const createRootReducer = (history: History) =>
   combineReducers({

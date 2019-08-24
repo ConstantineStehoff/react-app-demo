@@ -1,40 +1,40 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { toggleLogo } from '../../store/App/actions';
-import { State } from '../../store/rootReducer';
-import Button from '@material-ui/core/Button';
-import NavBar from '../NavBar';
-import Dashboard from '../Dashboard';
+import React from 'react';
+// import { connect } from 'react-redux';
+// import { toggleLogo } from '../../store/App/actions';
+// import { State } from '../../store/rootReducer';
+// import Button from '@material-ui/core/Button';
+import Dashboard from '../Dashboard/Dashboard';
 
-const logo = require('../../assets/logo.svg');
+// const logo = require('../../assets/logo.svg');
 
 interface DispatchProps {
   toggleLogo: () => void;
   showLogo: Boolean;
 }
 
-const Home = ({ toggleLogo, showLogo }: DispatchProps) => {
+const Home = (props: any) => {
   return (
     <div>
-      {/* <NavBar />
-      <Button variant="contained" color="primary" onClick={toggleLogo}>
+      {/* <Button variant="contained" color="primary" onClick={props.toggleLogo}>
         Toggle Logo!
       </Button>
-      {showLogo ? <img src={logo} /> : null} */}
+      {props.showLogo ? <img src={logo} alt="logo"/> : null} */}
 
-      <Dashboard />
+      <Dashboard props={props}/>
 
     </div>
   );
 };
 
-const mapStateToProps = (state: State) => {
-  return {
-    showLogo: state.app.showLogo
-  };
-};
+// const mapStateToProps = (state: State) => {
+//   return {
+//     showLogo: state.app.showLogo
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  { toggleLogo }
-)(Home);
+// export default connect(
+//   mapStateToProps,
+//   { toggleLogo }
+// )(Home);
+
+export default Home;

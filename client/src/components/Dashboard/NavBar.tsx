@@ -8,11 +8,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 interface Props {
-    handleDrawerOpen: any;
     drawerWidth: number;
 }
 
-export class NavBar extends React.Component<Props, {}> {
+export default class NavBar extends React.Component<Props, {}> {
     render(){
         const useStyles = makeStyles((theme:Theme) => ({
             toolbar: {
@@ -53,14 +52,12 @@ export class NavBar extends React.Component<Props, {}> {
         const classes = useStyles();
         return (
             <div>
-                <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+                <AppBar position="absolute" className={clsx(classes.appBar && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
                     <IconButton
                         edge="start"
                         color="inherit"
-                        aria-label="open drawer"
-                        onClick={this.props.handleDrawerOpen}
-                        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+                        className={clsx(classes.menuButton && classes.menuButtonHidden)}
                     >
                         <MenuIcon />
                     </IconButton>

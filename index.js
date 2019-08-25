@@ -1,31 +1,69 @@
 const express = require('express');
 const app = express();
-app.use(express.json());
-
 const path = require('path');
+const utils = require('./utils');
+const config = require('./config');
+const rp = require('request-promise');
 
-
-// Serve static files from the React app
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Put all API endpoints under '/api'
-app.post('/api/venuesbylocation', (req, res) => {
-    console.log(`someone accessed this endpoint`);
-    // console.log(JSON.stringify(req));
-    if(!req.body.city || !req.body.state){
-        return res.status(400).send({
-            success: 'false',
-            message: 'City or state are missing'
-        })
-    }
+app.get('/api/encrypt', (req, res) => {
+    const encryptedStr = utils.encrypt(req.query.str);
+    const decryptedStr = utils.decrypt(encryptedStr);
+    
     return res.status(200).send({
         success: 'true',
-        message: 'You reached the endpoint'
+        encryptedStr: encryptedStr,
+        decryptedStr: decryptedStr
     })
+})
+
+app.post('/api/venuesbylocation', (request, response) => {
+    console.log(`someone accessed this endpoint`);
+    
+    if(!request.body.city || !request.body.state){
+        return response
+            .status(400)
+            .send({
+                success: 'false',
+                message: 'City or state are missing'
+            })
+    }
+
+    const options = {
+        url: config.BASE_URL,
+        method: 'GET',
+        qs: {
+            client_id: config.CLIENT_ID,
+            client_secret: config.CLIENT_SECRET,
+            query: 'tacos',
+            near: request.body.city + ',' + request.body.state,
+            v: config.V_DATE,
+            limit: config.LIMIT_AMOUNT
+        }
+    }
+
+    rp(options)
+        .then(data => {
+            response
+                .status(200)
+                .type('application/json')
+                .send({
+                    success: 'true',
+                    message: data
+                })
+        })
+        .catch(error => {
+            response
+                .status(400)
+                .send({
+                    success: 'false',
+                    message: error
+                })
+        })
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });

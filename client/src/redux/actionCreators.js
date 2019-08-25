@@ -36,9 +36,9 @@ const getPlaces = (city, state) => {
           body: JSON.stringify({city: city, state: state})
         })
           .then(res => res.json())
-          .then(places => {
-              console.log(places);
-              // dispatch(GetPlacesSuccess(places));
+          .then(data => {
+              const message = JSON.parse(data.message);
+              dispatch(GetPlacesSuccess(message.response.venues));
           })
       .catch(error => {
           dispatch(GetPlacesError(error));

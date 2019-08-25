@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { getPlaces } from '../redux/actionCreators';
-import { getMockPlaces } from '../redux/mockRequest/mockActionCreators';
 import { Venues } from './Venues';
 import Title from './Title';
 import { makeStyles } from '@material-ui/core';
@@ -9,7 +8,6 @@ import {
   Container,
   CssBaseline,
   Button,
-  Typography,
   Grid,
   Paper
 } from '@material-ui/core';
@@ -69,13 +67,10 @@ const validate = values => {
 const App = (props) => {
     const classes = styles();
     const { onSubmit } = props;
-    // useEffect(() => getMockPlaces(), []);
-    // console.log(props.places);
-    // const places = props.places.places;
-    // console.log(props.mockPlaces);
+    const places = props.places.places;
+
     return props.loading ? <div>Loading...</div> : (
       <div className="App">
-        {/* <ul>{allPlaces}</ul> */}
         <CssBaseline />
 
         <main className={classes.content}>
@@ -120,7 +115,7 @@ const App = (props) => {
                     </Button>
                   </Grid>
                   <Grid item xs={12}>
-                    {/* <Venues venues={mockPlaces} /> */}
+                    <Venues venues={places} />
                   </Grid>
                 </Grid>
               </Paper>
@@ -138,14 +133,12 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     places: state.places,
-    //mockPlaces: state.mockPlaces,
     loading: state.loading
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // getPlaces: () => { dispatch(getPlaces()) },
     onSubmit: async values => dispatch(getPlaces(values.city, values.state))
   }
 }

@@ -9,6 +9,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('/api/encrypt', (req, res) => {
+    if(!req.query.str){
+        return res.status(400).send({
+            success: 'false'
+        })
+    }
     const encryptedStr = utils.encrypt(req.query.str);
     const decryptedStr = utils.decrypt(encryptedStr);
     
@@ -69,6 +74,6 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port);
+module.exports = app.listen(port);
 
 console.log(`Node app is listening on ${port}`);

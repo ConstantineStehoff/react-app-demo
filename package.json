@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "client"
+    ]
+  },
   "scripts": {
     "test": "node node_modules/.bin/jest",
     "start": "node index.js",
@@ -27,6 +32,7 @@
     "request-promise": "^4.2.4"
   },
   "devDependencies": {
-    "jest": "24.8.0"
+    "jest": "24.8.0",
+    "supertest": "^4.0.2"
   }
 }

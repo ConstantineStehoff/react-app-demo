@@ -9,7 +9,8 @@ import {
   CssBaseline,
   Button,
   Grid,
-  Paper
+  Paper,
+  Typography
 } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import { TextField } from 'final-form-material-ui';
@@ -50,6 +51,15 @@ const styles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     width: 200,
   },
+  topHeader: {
+    paddingTop: theme.spacing(4)
+  },
+  mainPaper:{
+    padding: theme.spacing(4)
+  },
+  copyright:{
+    paddingBottom: theme.spacing(4)
+  }
 }));
 
 
@@ -75,8 +85,10 @@ const App = (props) => {
     return props.loading ? <div>Loading...</div> : (
       <div className="App">
         <CssBaseline />
-
         <main className={classes.content}>
+          <Typography className={classes.topHeader} component="h1" variant="h4" color="primary" align="center">
+            Search places in the USA
+          </Typography>
           <Container maxWidth="lg" className={classes.container}>
           <Form
             onSubmit={onSubmit}
@@ -84,7 +96,7 @@ const App = (props) => {
             validate={validate}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit} noValidate>
-              <Paper style={{ padding: 16 }}>
+              <Paper className={classes.mainPaper}>
                 <Title>Search Form</Title>
                 <Grid container alignItems="flex-start" spacing={8}>
                 <Grid item xs={12}>
@@ -136,7 +148,7 @@ const App = (props) => {
             )}
             />
           </Container>
-          <Copyright name="React Demo App"/>
+          <Copyright name="React Demo App 2019"/>
         </main>
       </div>
     )

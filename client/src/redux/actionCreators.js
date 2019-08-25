@@ -1,4 +1,5 @@
 import {GET_PLACES_PENDING, GET_PLACES_ERROR, GET_PLACES_SUCCESS} from './types';
+import {GET_VENUES_BY_LOCATION_ENDPOINT} from './../config';
 
 function GetPlacesPending(){
   console.log('Pending');
@@ -23,22 +24,21 @@ function GetPlacesSuccess(places){
   }
 }
 
-const clientId = '';
-const clientSecret = '';
-
-// const limit = '2';
-
-const URL = 'https://api.foursquare.com/v2/venues/search?ll=40.7484,-73.9857&client_id=' + clientId + '&client_secret=' + clientSecret;
-
-function getPlaces(places){
+const getPlaces = (city, state) => {
   console.log('Trying to do the action');
   return (dispatch) => {
       dispatch(GetPlacesPending());
-      fetch(URL)
+      fetch(GET_VENUES_BY_LOCATION_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({city: city, state: state})
+        })
           .then(res => res.json())
           .then(places => {
               console.log(places);
-              dispatch(GetPlacesSuccess(places));
+              // dispatch(GetPlacesSuccess(places));
           })
       .catch(error => {
           dispatch(GetPlacesError(error));

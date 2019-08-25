@@ -1,0 +1,1 @@
+export const GET_VENUES_BY_LOCATION_ENDPOINT = '/api/venuesbylocation'; 

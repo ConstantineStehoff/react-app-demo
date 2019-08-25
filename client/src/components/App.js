@@ -71,8 +71,8 @@ const App = (props) => {
     const { onSubmit } = props;
     // useEffect(() => getMockPlaces(), []);
     // console.log(props.places);
-    const mockPlaces = props.mockPlaces.places;
-    console.log(props.mockPlaces);
+    // const places = props.places.places;
+    // console.log(props.mockPlaces);
     return props.loading ? <div>Loading...</div> : (
       <div className="App">
         {/* <ul>{allPlaces}</ul> */}
@@ -120,7 +120,7 @@ const App = (props) => {
                     </Button>
                   </Grid>
                   <Grid item xs={12}>
-                    <Venues venues={mockPlaces} />
+                    {/* <Venues venues={mockPlaces} /> */}
                   </Grid>
                 </Grid>
               </Paper>
@@ -137,8 +137,8 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    // places: state.places,
-    mockPlaces: state.mockPlaces,
+    places: state.places,
+    //mockPlaces: state.mockPlaces,
     loading: state.loading
   }
 }
@@ -146,7 +146,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // getPlaces: () => { dispatch(getPlaces()) },
-    onSubmit: async values => dispatch(getMockPlaces(values.city, values.state))
+    onSubmit: async values => dispatch(getPlaces(values.city, values.state))
   }
 }
 export default connect(

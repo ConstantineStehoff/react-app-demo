@@ -22,12 +22,12 @@ app.get('/api/encrypt', (req, res) => {
 app.post('/api/venuesbylocation', (request, response) => {
     console.log(`someone accessed this endpoint`);
     
-    if(!request.body.city || !request.body.state){
+    if(!request.body.city || !request.body.state || !request.body.searchTerm){
         return response
             .status(400)
             .send({
                 success: 'false',
-                message: 'City or state are missing'
+                message: 'City, state, or search term are missing'
             })
     }
 
@@ -37,7 +37,7 @@ app.post('/api/venuesbylocation', (request, response) => {
         qs: {
             client_id: config.CLIENT_ID,
             client_secret: config.CLIENT_SECRET,
-            query: 'tacos',
+            query: request.body.searchTerm,
             near: request.body.city + ',' + request.body.state,
             v: config.V_DATE,
             limit: config.LIMIT_AMOUNT

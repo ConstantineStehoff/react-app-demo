@@ -61,6 +61,9 @@ const validate = values => {
   if (!values.state) {
     errors.state = 'Required';
   }
+  if (!values.state) {
+    errors.searchTerm = 'Required';
+  }
   return errors;
 };
 
@@ -77,13 +80,23 @@ const App = (props) => {
           <Container maxWidth="lg" className={classes.container}>
           <Form
             onSubmit={onSubmit}
-            initialValues={{ city: '', state: '' }}
+            initialValues={{ city: '', state: '', searchTerm: '' }}
             validate={validate}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit} noValidate>
               <Paper style={{ padding: 16 }}>
                 <Title>Search Form</Title>
                 <Grid container alignItems="flex-start" spacing={8}>
+                <Grid item xs={12}>
+                    <Field
+                      fullWidth
+                      required
+                      name="searchTerm"
+                      component={TextField}
+                      type="text"
+                      label="Search Term"
+                    />
+                  </Grid>
                   <Grid item xs={6}>
                     <Field
                       fullWidth
@@ -139,7 +152,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSubmit: async values => dispatch(getPlaces(values.city, values.state))
+    onSubmit: async values => dispatch(getPlaces(values.city, values.state, values.searchTerm))
   }
 }
 export default connect(

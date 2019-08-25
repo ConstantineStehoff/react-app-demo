@@ -24,7 +24,7 @@ function GetPlacesSuccess(places){
   }
 }
 
-const getPlaces = (city, state) => {
+const getPlaces = (city, state, searchTerm) => {
   console.log('Trying to do the action');
   return (dispatch) => {
       dispatch(GetPlacesPending());
@@ -33,7 +33,7 @@ const getPlaces = (city, state) => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({city: city, state: state})
+          body: JSON.stringify({city: city, state: state, searchTerm: searchTerm})
         })
           .then(res => res.json())
           .then(data => {
